@@ -1,17 +1,19 @@
 <?php
     
 
-    require_once("../config/Config.php");
+    require_once("Config.php");
 
-    class Clientes extends Conexion{
+    class Empleados extends Conexion{
         private $id;
-        private $nombre;
+        private $usuario;
+        private $contrasena;
         
 
-        public function __construct($id,$nombre="",$dbCnx=""){
+        public function __construct($id=0,$usuario="",$contrasena="",$dbCnx=""){
             parent :: __construct($dbCnx);
             $this->id=$id;
-            $this->nombre=$nombre;
+            $this->usuario=$usuario;
+            $this->contrasena=$contrasena;
 
         }
 
@@ -22,7 +24,7 @@
 
         public function selectAll(){
             try {
-                $stm= $this->dbCnx->prepare("SELECT * FROM clientes;");
+                $stm= $this->dbCnx->prepare("SELECT * FROM empleados;");
                 $stm->execute();
                 return $stm->fetchAll();
             } catch (Exception $e) {
