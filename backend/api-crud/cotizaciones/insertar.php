@@ -15,6 +15,7 @@ $obj->setFecha_llegada($_POST['fecha_llegada']);
 $obj->setHora_llegada($_POST['hora_llegada']);
 $obj->setId_cliente($_POST['id_cliente']);
 $obj->setId_empleado($_POST['id_empleado']);
+$obj->setDescripcion($_POST['descripcion']);
 
 
 $obj->insertData();

@@ -11,9 +11,9 @@
         private $hora_llegada;
         private $id_cliente;
         private $id_empleado;
-        
+        private $descripcion;
 
-        public function __construct($id=0,$fecha_salida="",$hora_salida="",$fecha_llegada="",$hora_llegada="",$id_cliente="",$id_empleado="",$dbCnx=""){
+        public function __construct($id=0,$fecha_salida="",$hora_salida="",$fecha_llegada="",$hora_llegada="",$id_cliente="",$id_empleado="",$descripcion="",$dbCnx=""){
             parent :: __construct($dbCnx);
             $this->id=$id;
             $this->fecha_salida=$fecha_salida;
@@ -22,13 +22,15 @@
             $this->hora_llegada=$hora_llegada;
             $this->id_cliente=$id_cliente;
             $this->id_empleado=$id_empleado;
+            $this->descripcion=$descripcion;
+            
 
         }
 
         public function insertData(){
             try {
-                $stm= $this->dbCnx->prepare("INSERT INTO Cotizaciones(fecha_salida,hora_salida,fecha_llegada,hora_llegada,id_cliente,id_empleado) VALUES(?,?,?,?,?,?)");
-                $stm->execute([$this->fecha_salida,$this->hora_salida,$this->fecha_llegada,$this->hora_llegada,$this->id_cliente,$this->id_empleado]);
+                $stm= $this->dbCnx->prepare("INSERT INTO Cotizaciones(fecha_salida,hora_salida,fecha_llegada,hora_llegada,id_cliente,id_empleado,descripcion) VALUES(?,?,?,?,?,?,?)");
+                $stm->execute([$this->fecha_salida,$this->hora_salida,$this->fecha_llegada,$this->hora_llegada,$this->id_cliente,$this->id_empleado,$this->descripcion]);
             } catch (Exception $e) {
                 return $e->getMessage();
             }
@@ -186,6 +188,26 @@
         public function setId_empleado($id_empleado)
         {
                 $this->id_empleado = $id_empleado;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of descripcion
+         */ 
+        public function getDescripcion()
+        {
+                return $this->descripcion;
+        }
+
+        /**
+         * Set the value of descripcion
+         *
+         * @return  self
+         */ 
+        public function setDescripcion($descripcion)
+        {
+                $this->descripcion = $descripcion;
 
                 return $this;
         }
